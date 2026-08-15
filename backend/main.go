@@ -36,8 +36,15 @@ func main() {
 	userModel := &models.UserModel{DB: db}
 	userController := &controllers.UserController{UserModel: userModel}
 
-	http.HandleFunc("/user", userController.GetUserHandler)
+	http.HandleFunc("/user", cors(userController.GetUserHandler))
 
 	fmt.Println("Server running on port 8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))
+}
+
+func cors(next http.HandlerFunc) http.HandlerFunc {
+	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Access-Control-Allow-Origin", "*")
+		next(w, r)
+	}
 }
