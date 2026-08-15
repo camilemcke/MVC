@@ -1,0 +1,8 @@
+.env
+*.log
+
+# Go
+backend/server
+
+# Node (por si el frontend crece)
+node_modules/
