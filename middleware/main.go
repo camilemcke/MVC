@@ -21,10 +21,12 @@ func main() {
 	http.HandleFunc("/", cors(func(w http.ResponseWriter, r *http.Request) {
 		for prefix, worker := range routes {
 			if strings.HasPrefix(r.URL.Path, prefix) {
+				log.Printf("%s %s -> backend", r.Method, r.URL.Path)
 				worker.ServeHTTP(w, r)
 				return
 			}
 		}
+		log.Printf("%s %s -> sin worker", r.Method, r.URL.Path)
 		http.NotFound(w, r)
 	}))
 
