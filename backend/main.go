@@ -37,6 +37,9 @@ func main() {
 	userController := &controllers.UserController{UserModel: userModel}
 
 	http.HandleFunc("/user", userController.GetUserHandler)
+	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusOK)
+	})
 
 	fmt.Println("Server running on port 8080...")
 	log.Fatal(http.ListenAndServe(":8080", nil))

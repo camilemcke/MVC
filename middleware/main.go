@@ -3,40 +3,34 @@ package main
 import (
 	"log"
 	"net/http"
-	"net/http/httputil"
-	"net/url"
-	"strings"
+	"time"
 )
 
 func main() {
-	backend, err := url.Parse("http://backend:8080")
-	if err != nil {
-		log.Fatal(err)
+	routes := []Route{
+		{Prefix: "/user", Target: "http://backend:8080"},
 	}
 
-	routes := map[string]*httputil.ReverseProxy{
-		"/user": httputil.NewSingleHostReverseProxy(backend),
-	}
+	gw := NewGateway(routes, 10)
+	gw.startHeartbeatMonitor(5 * time.Second)
 
-	http.HandleFunc("/", cors(func(w http.ResponseWriter, r *http.Request) {
-		for prefix, worker := range routes {
-			if strings.HasPrefix(r.URL.Path, prefix) {
-				log.Printf("%s %s -> backend", r.Method, r.URL.Path)
-				worker.ServeHTTP(w, r)
-				return
-			}
-		}
-		log.Printf("%s %s -> sin worker", r.Method, r.URL.Path)
-		http.NotFound(w, r)
-	}))
+	mux := http.NewServeMux()
+	mux.HandleFunc("/heartbeat", heartbeatHandler)
+	mux.HandleFunc("/status", gw.statusHandler)
+	mux.Handle("/", gw)
 
-	log.Println("Middleware listening on :8082")
-	log.Fatal(http.ListenAndServe(":8082", nil))
+	log.Println("gateway listening on :8082")
+	log.Fatal(http.ListenAndServe(":8082", cors(mux)))
 }
 
-func cors(next http.HandlerFunc) http.HandlerFunc {
-	return func(w http.ResponseWriter, r *http.Request) {
+func heartbeatHandler(w http.ResponseWriter, r *http.Request) {
+	w.WriteHeader(http.StatusOK)
+	w.Write([]byte("gateway alive"))
+}
+
+func cors(next http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Access-Control-Allow-Origin", "*")
-		next(w, r)
-	}
+		next.ServeHTTP(w, r)
+	})
 }
