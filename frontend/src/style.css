@@ -63,3 +63,36 @@ button {
 #result p {
   margin: 8px 0;
 }
+
+.dashboard {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.metric-card {
+  background: white;
+  padding: 22px;
+  border-radius: 8px;
+}
+
+.metric-card span {
+  display: block;
+  color: #666;
+  margin-bottom: 10px;
+}
+
+.metric-card strong {
+  font-size: 30px;
+}
+
+@media (max-width: 700px) {
+  .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  form {
+    flex-direction: column;
+  }
+}

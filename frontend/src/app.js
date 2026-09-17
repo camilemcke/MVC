@@ -4,6 +4,26 @@ const formEl = document.getElementById("product-form");
 const idInput = document.getElementById("product-id");
 const resultEl = document.getElementById("result");
 
+async function loadAnalytics() {
+  const res = await fetch(`${API_BASE}/analytics`);
+
+  if (!res.ok) {
+    return;
+  }
+
+  const analytics = await res.json();
+
+  document.getElementById("total-products").textContent =
+    analytics.total_products;
+
+  document.getElementById("total-stock").textContent =
+    analytics.total_stock;
+
+  document.getElementById("low-stock").textContent =
+    analytics.low_stock_products;
+}
+
+loadAnalytics();
 formEl.addEventListener("submit", async (e) => {
   e.preventDefault();
 
