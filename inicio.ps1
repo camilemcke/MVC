@@ -1,7 +1,7 @@
-Write-Host "=== Beauty Source Inteligencia==="
+Write-Host "BEAUTY SOURCE"
 Write-Host ""
 
-Write-Host "1. Iniciando contenedores..."
+Write-Host "1. Iniciando contenedores"
 docker compose up --build -d
 
 if ($LASTEXITCODE -ne 0) {
@@ -10,11 +10,11 @@ if ($LASTEXITCODE -ne 0) {
 }
 
 Write-Host ""
-Write-Host "2. Esperando a que los servicios inicien..."
+Write-Host "2. Esperando a que los servicios inicien"
 Start-Sleep -Seconds 8
 
 Write-Host ""
-Write-Host "3. Probando servicios..."
+Write-Host "3. Probando servicios"
 
 $tests = @(
     @{
@@ -54,10 +54,10 @@ foreach ($test in $tests) {
 Write-Host ""
 
 if ($allOk) {
-    Write-Host "Todos los servicios estan funcionando."
+    Write-Host "Todos los servicios estan funcionando"
     Write-Host "Frontend: http://localhost:8081"
 }
 else {
-    Write-Host "Uno o mas servicios no respondieron correctamente."
+    Write-Host "Uno o mas servicios no respondieron correctamente"
     exit 1
 }
