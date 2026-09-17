@@ -43,6 +43,19 @@ services:
       db:
         condition: service_healthy
 
+  analytics:
+    build: ./analytics
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_USER: app
+      DB_PASSWORD: app
+      DB_NAME: app
+    depends_on:
+      db:
+        condition: service_healthy
+
   middleware:
     build: ./middleware
     restart: unless-stopped
