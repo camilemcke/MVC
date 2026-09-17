@@ -9,6 +9,7 @@ import (
 func main() {
 	routes := []Route{
 		{Prefix: "/user", Target: "http://backend:8080"},
+		{Prefix: "/product", Target: "http://backend:8080"},
 	}
 
 	gw := NewGateway(routes, 10)

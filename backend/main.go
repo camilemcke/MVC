@@ -35,8 +35,12 @@ func main() {
 
 	userModel := &models.UserModel{DB: db}
 	userController := &controllers.UserController{UserModel: userModel}
+	productModel := &models.ProductModel{DB: db}
+	productController := &controllers.ProductController{ProductModel: productModel}
 
+	
 	http.HandleFunc("/user", userController.GetUserHandler)
+	http.HandleFunc("/product", productController.GetProductHandler)
 	http.HandleFunc("/health", func(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusOK)
 	})
