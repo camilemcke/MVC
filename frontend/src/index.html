@@ -2,19 +2,39 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>MVC</title>
+  <title>Beauty Source | Inventario</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-  <h1>MVC</h1>
+  <header>
+    <h1>Beauty Source</h1>
+    <p>Inventory Intelligence</p>
+  </header>
 
-  <form id="user-form">
-    <input type="number" id="user-id" placeholder="ID de usuario" value="1" required />
-    <button type="submit">Buscar</button>
-  </form>
+  <main>
+    <section class="search-section">
+      <h2>Consulta de productos</h2>
+      <p>Busca un producto por su ID.</p>
 
-  <pre id="result"></pre>
+      <form id="product-form">
+        <input
+          type="number"
+          id="product-id"
+          placeholder="ID del producto"
+          value="1"
+          min="1"
+          required
+        />
+        <button type="submit">Buscar producto</button>
+      </form>
+    </section>
+
+    <section class="result-section">
+      <div id="result"></div>
+    </section>
+  </main>
 
   <script src="app.js"></script>
 </body>
