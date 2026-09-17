@@ -67,4 +67,12 @@ Petición 2 -> backend-2
 Petición 3 -> backend-1
 Petición 4 -> backend-2
 ```
+## Ejecución automatizada
 
+En Windows, el proyecto también puede iniciarse automáticamente con el siguiente comando:
+
+```powershell
+.\inicio.ps1
+```
+
+El script levanta los contenedores, dice si ya iniciaron los servicios y verifica automáticamente que cada uno funciona (Middleware, Products, Inventory y Analytics).

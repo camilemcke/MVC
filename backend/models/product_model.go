@@ -10,7 +10,6 @@ type Product struct {
 	SKU      string `json:"sku"`
 	Name     string `json:"name"`
 	Brand    string `json:"brand"`
-	Category string `json:"category"`
 }
 
 type ProductModel struct {
@@ -20,7 +19,7 @@ type ProductModel struct {
 func (m *ProductModel) GetByID(id int) (*Product, error) {
 	product := &Product{}
 
-	query := `SELECT id, sku, name, brand, category
+	query := `SELECT id, sku, name, brand
 	          FROM products
 	          WHERE id = $1`
 
@@ -29,7 +28,6 @@ func (m *ProductModel) GetByID(id int) (*Product, error) {
 		&product.SKU,
 		&product.Name,
 		&product.Brand,
-		&product.Category,
 	)
 
 	if err != nil {

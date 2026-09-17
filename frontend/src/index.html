@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
-  <title>Beauty Source | Inventario</title>
+  <title>Beauty Source Inventario</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -10,7 +10,7 @@
 <body>
   <header>
     <h1>Beauty Source</h1>
-    <p>Inventory Intelligence</p>
+    <p>Inteligencia</p>
   </header>
 
   <main>
@@ -29,10 +29,30 @@
     <span>Stock bajo</span>
     <strong id="low-stock">-</strong>
   </div>
+
+  <div class="metric-card">
+    <span>Sin stock</span>
+    <strong id="out-of-stock">-</strong>
+  </div>
+
+  <div class="metric-card">
+    <span>Entradas acumuladas</span>
+    <strong id="total-entries">-</strong>
+  </div>
+
+  <div class="metric-card">
+    <span>Salidas acumuladas</span>
+    <strong id="total-exits">-</strong>
+  </div>
+</section>
+<section class="chart-section">
+  <h2>Stock por marca</h2>
+
+  <div id="brand-chart"></div>
 </section>
     <section class="search-section">
       <h2>Consulta de productos</h2>
-      <p>Busca un producto por su ID.</p>
+      <p>Busca un producto por ID</p>
 
       <form id="product-form">
         <input
@@ -50,6 +70,29 @@
     <section class="result-section">
       <div id="result"></div>
     </section>
+    <section class="inventory-section">
+  <h2>Inventario general</h2>
+  <p>Movimiento de productos</p>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>SKU</th>
+          <th>Marca</th>
+          <th>Producto</th>
+          <th>Entradas</th>
+          <th>Salidas</th>
+          <th>Stock</th>
+          <th>Estado</th>
+        </tr>
+      </thead>
+
+      <tbody id="inventory-table">
+      </tbody>
+    </table>
+  </div>
+</section>
   </main>
 
   <script src="app.js"></script>

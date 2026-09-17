@@ -1,23 +1,31 @@
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Trebuchet MS", Arial, sans-serif;
   margin: 0;
-  background: #f5f5f5;
-  color: #222;
+  background: #f7f5f8;
+  color: #2b2730;
 }
 
 header {
   background: white;
   padding: 24px 10%;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 3px solid #a786b3;
 }
 
 header h1 {
   margin: 0;
+  color: #8f659d;
+  font-weight: 500;
+  letter-spacing: 2px;
+}
+h2 {
+  color: #8f659d;
+  font-weight: 500;
 }
 
 header p {
-  margin: 5px 0 0;
-  color: #666;
+  margin: 6px 0 0;
+  color: #777;
+  letter-spacing: 1px;
 }
 
 main {
@@ -54,6 +62,14 @@ button {
   padding: 10px 18px;
   font-size: 16px;
   cursor: pointer;
+  background: #9b74a8;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background: #805d8c;
 }
 
 #result h3 {
@@ -75,6 +91,7 @@ button {
   background: white;
   padding: 22px;
   border-radius: 8px;
+  border-top: 3px solid #a786b3;
 }
 
 .metric-card span {
@@ -85,8 +102,8 @@ button {
 
 .metric-card strong {
   font-size: 30px;
+  color: #8f659d;
 }
-
 @media (max-width: 700px) {
   .dashboard {
     grid-template-columns: 1fr;
@@ -95,4 +112,89 @@ button {
   form {
     flex-direction: column;
   }
+}
+
+.inventory-section {
+  background: white;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.inventory-section h2 {
+  margin-top: 0;
+}
+
+.table-container {
+  overflow-x: auto;
+  margin-top: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background: #eee7f1;
+  color: #6f4f79;
+}
+
+td:nth-child(4),
+td:nth-child(5),
+td:nth-child(6) {
+  text-align: center;
+}
+
+.chart-section {
+  background: white;
+  padding: 25px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.chart-section h2 {
+  margin-top: 0;
+}
+
+#brand-chart {
+  margin-top: 25px;
+}
+
+.chart-row {
+  display: grid;
+  grid-template-columns: 150px 1fr 60px;
+  gap: 15px;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.chart-label {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.chart-bar-container {
+  height: 18px;
+  background: #eeeeee;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.chart-bar {
+  height: 100%;
+  background: #9b74a8;
+  border-radius: 4px;
+}
+
+.chart-value {
+  text-align: right;
+  font-weight: bold;
 }
