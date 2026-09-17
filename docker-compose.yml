@@ -17,7 +17,7 @@ services:
       timeout: 5s
       retries: 5
 
-  backend:
+  backend-1:
     build: ./backend
     restart: unless-stopped
     environment:
@@ -26,9 +26,31 @@ services:
       DB_USER: app
       DB_PASSWORD: app
       DB_NAME: app
+      INSTANCE_NAME: backend-1
     depends_on:
       db:
         condition: service_healthy
+
+  backend-2:
+    build: ./backend
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: "5432"
+      DB_USER: app
+      DB_PASSWORD: app
+      DB_NAME: app
+      INSTANCE_NAME: backend-2
+    depends_on:
+      db:
+        condition: service_healthy
+
+  load-balancer:
+    build: ./load-balancer
+    restart: unless-stopped
+    depends_on:
+      - backend-1
+      - backend-2
 
   inventory:
     build: ./inventory
@@ -62,7 +84,9 @@ services:
     ports:
       - "8082:8082"
     depends_on:
-      - backend
+      - load-balancer
+      - inventory
+      - analytics
 
   frontend:
     build: ./frontend

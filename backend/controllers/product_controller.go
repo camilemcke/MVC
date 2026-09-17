@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+	"os"
 	"net/http"
 	"strconv"
 
@@ -28,5 +29,6 @@ func (c *ProductController) GetProductHandler(w http.ResponseWriter, r *http.Req
 	}
 
 	w.Header().Set("Content-Type", "application/json")
+	w.Header().Set("X-Instance", os.Getenv("INSTANCE_NAME"))
 	json.NewEncoder(w).Encode(product)
 }
