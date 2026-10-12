@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8082";
+const API_BASE = "http://localhost:8083";
 
 const formEl = document.getElementById("product-form");
 const idInput = document.getElementById("product-id");

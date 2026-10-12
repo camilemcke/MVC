@@ -76,3 +76,40 @@ En Windows, el proyecto también puede iniciarse automáticamente con el siguien
 ```
 
 El script levanta los contenedores, dice si ya iniciaron los servicios y verifica automáticamente que cada uno funciona (Middleware, Products, Inventory y Analytics).
+
+## Nginx Reverse Proxy y Load Balancer
+
+Se agregó Nginx como Reverse Proxy y Load Balancer, Nginx se ejecuta en un contenedor independiente y recibe las peticiones del frontend en el puerto 8083
+
+Según la ruta dirige las peticiones a los microservicios:
+
+- `/product` → Products
+- `/inventory` → Inventory
+- `/analytics` → Analytics
+
+Para Products se configuraron dos (`backend-1` y `backend-2`). Nginx distribuye las solicitudes con Round Robin, alternando entre ambas. La configuración está en la carpeta `nginx-gateway`
+
+### Arquitectura
+
+```text
+Frontend (8081)
+      |
+      v
+Nginx Gateway (8083)
+      |
+      |--- /product ---> backend-1
+      |             |
+      |             +--> backend-2
+      |
+      |--- /inventory --> Inventory
+      |
+      +--- /analytics --> Analytics
+```
+
+Los microservicios utilizan PostgreSQL como base de datos
+
+no quité el Middleware y el Load Balancer de antes aunque ya no se usan.
+
+### Pruebas
+
+probé con solicitudes HTTP a Products, Inventory y Analytics. También se realizaron seis solicitudes consecutivas a Products, verificando que Nginx manda las peticiones entre `backend-1` y `backend-2`.

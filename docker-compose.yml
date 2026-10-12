@@ -96,5 +96,18 @@ services:
     depends_on:
       - middleware
 
+  
+  nginx-gateway:
+    build: ./nginx-gateway
+    restart: unless-stopped
+    ports:
+      - "8083:8000"
+    depends_on:
+      - backend-1
+      - backend-2
+      - inventory
+      - analytics
+
+
 volumes:
   db_data:
